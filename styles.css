@@ -136,3 +136,20 @@
     padding: 10px;
 }
 
+.win-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.win-message > p {
+    font-size: 20px;
+    text-align: center;
+}
+
+.win-message > button {
+    height: 30px;
+    color: #1B1C1D;
+}

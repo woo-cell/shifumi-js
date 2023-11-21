@@ -6,10 +6,20 @@ const compChoice = document.getElementById("comp-choice");
 const userScore = document.getElementById("user-score");
 const compScore = document.getElementById("comp-score");
 const winMessage = document.getElementById("winner");
+const playZone = document.getElementById("play-zone");
 
 rockButton.addEventListener("click", playRock);
 paperButton.addEventListener("click", playPaper);
 scissorsButton.addEventListener("click", playScissors);
+
+const winDiv = document.createElement("div");
+winDiv.classList.add("win-message");
+const winP = document.createElement("p");
+const replayButton = document.createElement("button");
+replayButton.textContent = "REPLAY";
+replayButton.addEventListener("click", resetScreen);
+winDiv.appendChild(winP);
+winDiv.appendChild(replayButton);
 
 let userPoints = 0;
 let compPoints = 0;
@@ -117,23 +127,28 @@ function getComputerChoice() {
 
 function pointCounter(won) {
     if (won === "U") {
-        userPoints ++;
-        userScore.textContent = userPoints;
+        userScore.textContent = ++userPoints;
     } else if (won === "C") {
-        compPoints ++;
-        compScore.textContent = compPoints;
+        compScore.textContent = ++compPoints;
     } else {
 
     }
 }
 
+
 function gameOver(uP,cP) {
     if (uP>=5) {
-        alert("YOU WON, YOU SCORED 5 POINTS FIRST");
-        resetScreen()
+        // alert("YOU WON, YOU SCORED 5 POINTS FIRST");
+        // resetScreen()
+        winP.textContent = "YOU WON, YOU SCORED 5 POINTS FIRST";
+        playZone.appendChild(winDiv);
+        resetScore();
     } else if (cP>=5) {
-        alert("YOU LOST, COMPUTER SCORED 5 POINTS FIRST");
-        resetScreen()
+        // alert("YOU LOST, COMPUTER SCORED 5 POINTS FIRST");
+        // resetScreen()
+        winP.textContent = "YOU LOST, COMPUTER SCORED 5 POINTS FIRST";
+        playZone.appendChild(winDiv);
+        resetScore();
     }
 }
 
@@ -143,6 +158,10 @@ function resetScreen() {
     compScore.textContent = "";
     userChoice.textContent = "";
     compChoice.textContent = "";
+    playZone.removeChild(winDiv);
+}
+
+function resetScore() {
     userPoints = 0;
     compPoints = 0;
 }
