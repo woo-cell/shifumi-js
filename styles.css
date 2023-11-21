@@ -1,0 +1,138 @@
+* {
+    font-family: 'Courier New', Courier, monospace;
+    color: #F5DDDD;
+    margin: 1px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    height: 100vh;
+}
+
+.title-zone {
+    background-color: #3A4454;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    gap: 10px;
+}
+
+.title-zone > h1 {
+    text-align: center;
+    font-size: 40px;
+    padding: 40px;
+}
+
+.title-zone > p {
+    text-align: center;
+    padding: 40px;
+    background-color: #53687E;
+}
+
+.play-zone {
+    background-color: #1B1C1D;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttons {
+    height: 100px;
+    /* width: 500px; */
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+}
+
+.buttons > button {
+    flex: 1;
+    height: 100%;
+    width: 120px;
+    padding: 0;
+    background-color: #F5DDDD;
+    color: #1B1C1D;
+    font-size: 20px;
+}
+
+.buttons > button:hover {
+    flex: 1;
+    height: 100%;
+    background-color: #53687E;
+    color: #1B1C1D;
+}
+
+.choices {
+    display: flex;
+    flex-direction: row;
+    /* width: 600px; */
+}
+
+.user-choice-container {
+    flex: 1;
+    width: 200px;
+    text-align: center;
+    margin: 10px;
+    border: 1px solid #53687E;
+}
+
+.comp-choice-container {
+    flex: 1;
+    width: 200px;
+    text-align: center;
+    margin: 10px;
+    border: 1px solid #53687E;
+}
+
+#user-choice {
+    margin: 10px;
+    height: 60px;
+    font-size: 20px;
+}
+
+#comp-choice {
+    margin: 10px;
+    height: 60px;
+    font-size: 20px;
+}
+
+.score-zone {
+    height: 200px;
+    background-color: #53687E;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.user-score-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3A4454;
+}
+
+.comp-score-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #3A4454;
+}
+
+#user-score {
+    font-size: 50px;
+    padding: 10px;
+}
+
+#comp-score {
+    font-size: 50px;
+    padding: 10px;
+}
+

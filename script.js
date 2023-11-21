@@ -1,25 +1,82 @@
-"use strict";
-function getComputerChoice() {
-    let randomNumber = Math.floor(Math.random()*3)+1;
-    let computerChoice;
-    if (randomNumber === 1) {
-        computerChoice = "ROCK";
-    } else if (randomNumber === 2) {
-        computerChoice = "PAPER";
-    } else {
-        computerChoice = "SCISSORS";
+const rockButton = document.getElementById("btn1");
+const paperButton = document.getElementById("btn2");
+const scissorsButton = document.getElementById("btn3");
+const userChoice = document.getElementById("user-choice");
+const compChoice = document.getElementById("comp-choice");
+const userScore = document.getElementById("user-score");
+const compScore = document.getElementById("comp-score");
+const winMessage = document.getElementById("winner");
+
+rockButton.addEventListener("click", playRock);
+paperButton.addEventListener("click", playPaper);
+scissorsButton.addEventListener("click", playScissors);
+
+let userPoints = 0;
+let compPoints = 0;
+
+
+
+function playRock(){
+    let playerChoice = "ROCK";
+    let computerChoice = getComputerChoice();
+    let winner = playRound(computerChoice,playerChoice);
+    userChoice.textContent = "ROCK";
+    compChoice.textContent = computerChoice;
+    let message;
+    if (winner === "D") {
+        message = "its a draw";
+        winMessage.textContent = message;
+    } else if (winner === "U") {
+        message = "rock beats scissors, you win this round";
+        winMessage.textContent = message;
+    } else if (winner === "C") {
+        message = "rock is beaten by paper, you lost this round";
+        winMessage.textContent = message;
     }
-    console.log(computerChoice);
-    return computerChoice;
+    pointCounter(winner);
+    gameOver(userPoints,compPoints);
 }
 
-// get user choice, if no choice or other choices, reprompt
-function getUserChoice() {
-    let userChoice = "";
-    while (userChoice !== "ROCK" && userChoice !== "PAPER" && userChoice !== "SCISSORS") {
-        userChoice = String(prompt("Rock, paper or scissors?")).toUpperCase();
+function playPaper(){
+    let playerChoice = "PAPER";
+    let computerChoice = getComputerChoice();
+    let winner = playRound(computerChoice,playerChoice);
+    userChoice.textContent = "PAPER";
+    compChoice.textContent = computerChoice;
+    let message;
+    if (winner === "D") {
+        message = "its a draw";
+        winMessage.textContent = message;
+    } else if (winner === "U") {
+        message = "paper beats rock, you win this round";
+        winMessage.textContent = message;
+    } else if (winner === "C") {
+        message = "paper is beaten by scissors, you lost this round";
+        winMessage.textContent = message;
     }
-    return userChoice;
+    pointCounter(winner);
+    gameOver(userPoints,compPoints);
+}
+
+function playScissors(){
+    let playerChoice = "SCISSORS";
+    let computerChoice = getComputerChoice();
+    let winner = playRound(computerChoice,playerChoice);
+    userChoice.textContent = "SCISSORS";
+    compChoice.textContent = computerChoice;
+    let message;
+    if (winner === "D") {
+        message = "its a draw";
+        winMessage.textContent = message;
+    } else if (winner === "U") {
+        message = "scissors beats paper, you win this round";
+        winMessage.textContent = message;
+    } else if (winner === "C") {
+        message = "scissors is beaten by rock, you lost this round";
+        winMessage.textContent = message;
+    }
+    pointCounter(winner);
+    gameOver(userPoints,compPoints);
 }
 
 function playRound(computerSelection, playerSelection) {
@@ -33,54 +90,59 @@ function playRound(computerSelection, playerSelection) {
         || playerSelection === "ROCK" && computerSelection === "SCISSORS") {
         winner = "U";
         return winner;
-    } else {
+    } else if (
+        playerSelection === "PAPER" && computerSelection === "SCISSORS"
+        || playerSelection === "SCISSORS" && computerSelection === "ROCK"
+        || playerSelection === "ROCK" && computerSelection === "PAPER") {
         winner = "C"
         return winner;
     }
 }
 
-/* if
-comp rock user rock : draw
-comp paper user paper : draw
-comp sci user sci : draw
-
-comp rock user paper : user win
-comp paper user sci : user win
-comp sci user rock : user win
-
-comp rock user sci : comp win
-comp paper user rock : comp win
-comp sci user paper : comp win
-
-*/
-
-function game(num) {
-    let score = 0;
-    let wMessage;
-    function scoreCounter(whoWins) {
-        if (whoWins==="D") {
-            score = score;
-        } else if (whoWins==="U") {
-            score ++;
-        } else if (whoWins==="C") {
-            score = score;
-        }
-        return score;
+function getComputerChoice() {
+    let randomNumber = Math.floor(Math.random()*3)+1;
+    let computerChoice;
+    if (randomNumber === 1) {
+        computerChoice = "ROCK";
+    } else if (randomNumber === 2) {
+        computerChoice = "PAPER";
+    } else {
+        computerChoice = "SCISSORS";
     }
-    function winMessage(whoWins,point) {
-        if (whoWins==="D") {
-            wMessage = `It's a draw. You have ${point} points`;
-        } else if (whoWins==="U") {
-            wMessage = `You win, computer looses. You have ${point} points`;
-        } else if (whoWins==="C") {
-            wMessage = `You lose, computer wins. You have ${point} points`;
-        }
-        return wMessage;
+    // addCChoiceToDiv(computerChoice);
+    console.log(computerChoice);
+    return computerChoice;
+}
+
+
+function pointCounter(won) {
+    if (won === "U") {
+        userPoints ++;
+        userScore.textContent = userPoints;
+    } else if (won === "C") {
+        compPoints ++;
+        compScore.textContent = compPoints;
+    } else {
+
     }
-    for (let i = 0 ; i < num; i ++) {
-        let wi = playRound(getComputerChoice(),getUserChoice());
-        let sc = scoreCounter(wi);
-        let ms = winMessage(wi,sc);
-        console.log(ms);
+}
+
+function gameOver(uP,cP) {
+    if (uP>=5) {
+        alert("YOU WON, YOU SCORED 5 POINTS FIRST");
+        resetScreen()
+    } else if (cP>=5) {
+        alert("YOU LOST, COMPUTER SCORED 5 POINTS FIRST");
+        resetScreen()
     }
+}
+
+function resetScreen() {
+    winMessage.textContent = "";
+    userScore.textContent = "";
+    compScore.textContent = "";
+    userChoice.textContent = "";
+    compChoice.textContent = "";
+    userPoints = 0;
+    compPoints = 0;
 }

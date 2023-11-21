@@ -1,2 +1,2 @@
 # shifumi-js
-shifumi console game
+SHI-FU-MI
