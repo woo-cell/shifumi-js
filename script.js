@@ -17,7 +17,7 @@ winDiv.classList.add("win-message");
 const winP = document.createElement("p");
 const replayButton = document.createElement("button");
 replayButton.textContent = "REPLAY";
-replayButton.addEventListener("click", resetScreen);
+replayButton.addEventListener("click", resetGame);
 winDiv.appendChild(winP);
 winDiv.appendChild(replayButton);
 
@@ -143,12 +143,14 @@ function gameOver(uP,cP) {
         winP.textContent = "YOU WON, YOU SCORED 5 POINTS FIRST";
         playZone.appendChild(winDiv);
         resetScore();
+        disableButtons()
     } else if (cP>=5) {
         // alert("YOU LOST, COMPUTER SCORED 5 POINTS FIRST");
         // resetScreen()
         winP.textContent = "YOU LOST, COMPUTER SCORED 5 POINTS FIRST";
         playZone.appendChild(winDiv);
         resetScore();
+        disableButtons()
     }
 }
 
@@ -164,4 +166,23 @@ function resetScreen() {
 function resetScore() {
     userPoints = 0;
     compPoints = 0;
+}
+
+function disableButtons() {
+    const buttons = document.querySelectorAll(".btn");
+    buttons.forEach((button) => {
+        button.disabled = true;
+    });
+}
+
+function enableButtons() {
+    const buttons = document.querySelectorAll(".btn");
+    buttons.forEach((button) => {
+        button.disabled = false;
+    });
+}
+
+function resetGame() {
+    resetScreen();
+    enableButtons();
 }
